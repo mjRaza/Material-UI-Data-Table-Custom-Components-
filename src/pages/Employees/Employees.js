@@ -32,7 +32,12 @@ const Employees = () => {
     employeeService.getAllEmployees()
   );
 
-  const { TableContianer, TableHeader } = useTable(records, headCells);
+  const {
+    TableContianer,
+    TableHeader,
+    TablePaginationAction,
+    recordsAfterPagingAndSorting,
+  } = useTable(records, headCells);
   return (
     <>
       <PageHeader
@@ -45,7 +50,7 @@ const Employees = () => {
         <TableContianer>
           <TableHeader />
           <TableBody>
-            {records.map((item) => (
+            {recordsAfterPagingAndSorting().map((item) => (
               <TableRow key={item.id}>
                 <TableCell>{item.fullName}</TableCell>
                 <TableCell>{item.email}</TableCell>
@@ -55,6 +60,7 @@ const Employees = () => {
             ))}
           </TableBody>
         </TableContianer>
+        <TablePaginationAction />
       </Paper>
     </>
   );
